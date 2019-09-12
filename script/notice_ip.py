@@ -29,8 +29,7 @@ def load_config(file_path):
 def run(sc_key):
     ip = get_host_ip()
     title = "树莓派IP:{}".format(ip.replace(".", "_"))
-    print(ip)
-    # serverchan.send(title, ip, sc_key)
+    serverchan.send(title, ip, sc_key)
 
 
 if __name__ == '__main__':
