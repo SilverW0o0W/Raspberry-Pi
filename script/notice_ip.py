@@ -7,12 +7,18 @@ import socket
 
 import toml
 
-from script import serverchan
+import serverchan
 
 
-def get_local_ip():
-    hostname = socket.getfqdn(socket.gethostname())
-    return socket.gethostbyname(hostname)
+def get_host_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(('8.8.8.8', 80))
+        ip = s.getsockname()[0]
+    finally:
+        s.close()
+
+    return ip
 
 
 def load_config(file_path):
@@ -21,9 +27,10 @@ def load_config(file_path):
 
 
 def run(sc_key):
-    ip = get_local_ip()
+    ip = get_host_ip()
     title = "树莓派IP:{}".format(ip.replace(".", "_"))
-    serverchan.send(title, ip, sc_key)
+    print(ip)
+    # serverchan.send(title, ip, sc_key)
 
 
 if __name__ == '__main__':
