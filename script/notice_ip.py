@@ -32,7 +32,8 @@ def run(sc_key):
         ip = get_host_ip()
         time.sleep(1)
     title = "树莓派IP:{}".format(ip.replace(".", "_"))
-    serverchan.send(title, ip, sc_key)
+    content = "{}\n{}".format(ip, time.time())
+    serverchan.send(title, content, sc_key)
 
 
 if __name__ == '__main__':
