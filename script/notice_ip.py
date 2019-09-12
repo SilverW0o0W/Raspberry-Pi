@@ -27,12 +27,13 @@ def load_config(file_path):
 
 
 def run(sc_key):
+    now = int(time.time())
     ip = None
     while not ip:
         ip = get_host_ip()
         time.sleep(1)
     title = "树莓派IP:{}".format(ip.replace(".", "_"))
-    content = "{}\n{}".format(ip, time.time())
+    content = "{}\n{}".format(ip, now)
     serverchan.send(title, content, sc_key)
 
 
