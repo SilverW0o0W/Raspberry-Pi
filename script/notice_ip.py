@@ -4,6 +4,7 @@
 import os
 import sys
 import socket
+import time
 
 import toml
 
@@ -11,14 +12,13 @@ import serverchan
 
 
 def get_host_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        s.connect(('8.8.8.8', 80))
-        ip = s.getsockname()[0]
-    finally:
-        s.close()
-
-    return ip
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+        try:
+            s.connect(('8.8.8.8', 80))
+            ip = s.getsockname()[0]
+        except OSError:
+            ip = None
+        return ip
 
 
 def load_config(file_path):
@@ -27,7 +27,10 @@ def load_config(file_path):
 
 
 def run(sc_key):
-    ip = get_host_ip()
+    ip = None
+    while not ip:
+        ip = get_host_ip()
+        time.sleep(1)
     title = "树莓派IP:{}".format(ip.replace(".", "_"))
     serverchan.send(title, ip, sc_key)
 
