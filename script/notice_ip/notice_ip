@@ -1,0 +1,15 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:		notice_ip
+# Required-Start:	$remote_fs $syslog
+# Required-Stop:	$remote_fs $syslog
+# Default-Start:	2 3 4 5
+# Default-Stop:
+# Short-Description:	OpenBSD Secure Shell server
+### END INIT INFO
+
+cd /data/Raspberry-Pi/script/notice_ip
+python notice_ip.py conf/notice_ip.toml
+
+exit 0
