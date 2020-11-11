@@ -9,7 +9,12 @@
 # Short-Description:	OpenBSD Secure Shell server
 ### END INIT INFO
 
-cd /data/Raspberry-Pi/script/notice_ip
-python notice_ip.py conf/notice_ip.toml
+start() {
+    cd /data/Raspberry-Pi/script/notice_ip
+    python notice_ip.py conf/notice_ip.toml
+}
+
+stop() {
+}
 
 exit 0
