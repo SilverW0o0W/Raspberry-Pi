@@ -1,0 +1,12 @@
+[Unit]
+Description=My service
+After=network.target
+
+[Service]
+ExecStart=python notice_ip.py ../conf/notice_ip.toml
+WorkingDirectory=/data/Raspberry-Pi/script/notice_ip
+StandardOutput=inherit
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target
