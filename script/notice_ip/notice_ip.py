@@ -12,13 +12,15 @@ import serverchan
 
 
 def get_host_ip():
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-        try:
-            s.connect(('8.8.8.8', 80))
-            ip = s.getsockname()[0]
-        except OSError:
-            ip = None
-        return ip
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(('8.8.8.8', 80))
+        ip = s.getsockname()[0]
+    except OSError:
+        ip = None
+    finally:
+        s.close()
+    return ip
 
 
 def load_config(file_path):
