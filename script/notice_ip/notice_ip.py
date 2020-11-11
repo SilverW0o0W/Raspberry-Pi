@@ -50,3 +50,4 @@ if __name__ == '__main__':
         exit(-1)
     config = load_config(config_file_path)
     run(config["sc_key"])
+    exit(0)
