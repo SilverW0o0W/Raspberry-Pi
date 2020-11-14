@@ -4,8 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=idle
-ExecStart=/usr/bin/python notice_ip.py conf/notice_ip.toml
-WorkingDirectory=/data/Raspberry-Pi/script/notice_ip
+ExecStart=/usr/bin/python /usr/local/src/notice_ip/notice_ip.py /etc/notice_ip/notice_ip.toml
 
 [Install]
 WantedBy=multi-user.target
